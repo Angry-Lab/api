@@ -88,6 +88,12 @@ func Run(config *env.Config) error {
 	e := echo.New()
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
+	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins:     []string{"*"},
+		AllowMethods:     []string{http.MethodPost, http.MethodGet, http.MethodOptions},
+		AllowHeaders:     []string{"Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept"},
+		AllowCredentials: true,
+	}))
 
 	h := &Handler{
 		Tokens: mockup.Tokens(),
