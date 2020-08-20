@@ -1,0 +1,63 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: angry
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: admin-api-svc
+  namespace: angry
+spec:
+  selector:
+    app: admin-api
+  ports:
+    - port: 6363
+      targetPort: 6363
+      protocol: TCP
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: admin-api
+  namespace: angry
+spec:
+  selector:
+    matchLabels:
+      app: admin-api
+  template:
+    metadata:
+      labels:
+        app: admin-api
+    spec:
+      containers:
+        - name: admin-api
+          image: r.golangpro.ru/angry-lab/api:latest
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: 500Mi
+              cpu: 500m
+      imagePullSecrets:
+        - name: r-golang-pro-registry
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: admin-api-ingress
+  namespace: angry
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+    - host: api.golangpro.ru
+      http:
+        paths:
+          - path: "/v1/(.*)"
+            backend:
+              serviceName: admin-api-svc
+              servicePort: 6363
