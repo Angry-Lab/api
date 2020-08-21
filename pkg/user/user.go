@@ -7,6 +7,7 @@ import (
 
 const (
 	ContextKey = "ctx_user"
+	TokenKey   = "ctx_token"
 
 	AuthToken TokenType = "auth"
 

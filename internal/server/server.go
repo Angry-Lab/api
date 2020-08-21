@@ -42,5 +42,10 @@ func Run(config *env.Config) error {
 	e.POST("/v1/auth", h.Auth)
 	e.POST("/v1/auth/reset", h.ResetPassword)
 
+	e.GET("/v1/users", h.ListUsers, h.WithAuth, h.WithAccess(user.RoleOwner))
+	e.POST("/v1/users", h.CreateUser, h.WithAuth, h.WithAccess(user.RoleOwner))
+	e.PUT("/v1/users", h.UpdateUser, h.WithAuth, h.WithAccess(user.RoleOwner))
+	e.DELETE("/v1/users", h.DeleteUser, h.WithAuth, h.WithAccess(user.RoleOwner))
+
 	return e.Start(fmt.Sprintf("%s:%d", config.Host, config.Port))
 }
