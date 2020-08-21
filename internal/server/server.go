@@ -39,8 +39,8 @@ func Run(config *env.Config) error {
 		Users: user.NewUseCase(userRepo, tokenRepo),
 	}
 
-	e.POST("/auth", h.Auth)
-	e.POST("/auth/reset", h.ResetPassword)
+	e.POST("/v1/auth", h.Auth)
+	e.POST("/v1/auth/reset", h.ResetPassword)
 
 	return e.Start(fmt.Sprintf("%s:%d", config.Host, config.Port))
 }

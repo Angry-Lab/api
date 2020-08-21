@@ -1,15 +1,15 @@
-# api
+# REST API
 
 Development:
 
 ```
-go run ./cmd/main.go
+go run ./cmd/api/main.go
 ```
 
 Build:
 
 ```
-go build -o ./api ./cmd/main.go
+go build -o ./api ./cmd/api/main.go
 ```
 
 Run:
@@ -17,3 +17,5 @@ Run:
 ```
 ./api
 ```
+
+[API Documentation](/docs/api.md)

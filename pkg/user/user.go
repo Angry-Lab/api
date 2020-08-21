@@ -50,7 +50,7 @@ type (
 		DTExpired time.Time `db:"dt_expired" json:"dt_expired"`
 		DTCreated time.Time `db:"dt_created" json:"dt_created"`
 
-		User *User `db:"-"`
+		User *User `db:"-" json:"user,omitempty"`
 	}
 
 	Filter struct {
