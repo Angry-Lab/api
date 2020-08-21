@@ -154,12 +154,13 @@ func (uc *userCase) CreateAuthToken(ctx context.Context, entity *User) (*Token, 
 	}
 
 	t := sha256.Sum256([]byte(strings.Join(uniq, "_")))
+
 	token := &Token{
 		User:      entity,
 		UserID:    entity.ID,
 		Type:      AuthToken,
 		Token:     hex.EncodeToString(t[:]),
-		DTExpired: time.Now().Add(24 * time.Hour),
+		DTExpired: time.Now().Add(7 * 24 * time.Hour),
 	}
 
 	token, err := uc.tokens.Create(ctx, *token)
