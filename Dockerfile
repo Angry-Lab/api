@@ -6,7 +6,7 @@ WORKDIR /src
 ENV CGO_ENABLED 0
 ENV GOPRIVATE github.com/Angry-Lab/*
 
-RUN go build -v -o /api ./cmd/main.go
+RUN go build -v -o /api ./cmd/api/main.go
 
 FROM alpine:3.11
 
