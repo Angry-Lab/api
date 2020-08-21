@@ -36,8 +36,11 @@ spec:
           imagePullPolicy: Always
           resources:
             requests:
-              memory: 502Mi
+              memory: 500Mi
               cpu: 500m
+          envFrom:
+            - configMapRef:
+                name: admin-api-config
       imagePullSecrets:
         - name: r-golang-pro-registry
 ---
