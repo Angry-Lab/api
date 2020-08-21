@@ -17,14 +17,21 @@ func (h *Handler) Auth(ctx echo.Context) error {
 		return echo.NewHTTPError(http.StatusInternalServerError, err.Error()).SetInternal(err)
 	}
 
-	if u.Password != req.Password {
-		return echo.NewHTTPError(http.StatusUnauthorized, "invalid password")
+	ok, err := h.Users.ComparePassword(u, req.Password)
+	if err != nil {
+		return echo.NewHTTPError(http.StatusInternalServerError, err.Error()).SetInternal(err)
+	}
+
+	if !ok {
+		return echo.NewHTTPError(http.StatusUnauthorized, "invalid password").SetInternal(err)
 	}
 
 	t, err := h.Users.CreateAuthToken(ctx.Request().Context(), u)
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError, err.Error()).SetInternal(err)
 	}
+
+	t.User = nil
 
 	return ctx.JSON(http.StatusOK, t)
 }
