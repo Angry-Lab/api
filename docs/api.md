@@ -31,3 +31,45 @@ curl --location --request PUT 'localhost:6363/v1/auth/reset' \
     "password": "pasw0rd"
 }'
 ```
+
+### Segments List
+
+```
+curl --location --request GET 'localhost:6363/v1/segments' \
+--header 'X-Auth-Token: 2c763f5bc41fa64f95b02993bb49969a067d8a1b1f4ce2a7f1963f8e6c06cc33'
+```
+
+
+### Get Segment
+
+```
+curl --location --request GET 'localhost:6363/v1/segments/1' \
+--header 'X-Auth-Token: 2c763f5bc41fa64f95b02993bb49969a067d8a1b1f4ce2a7f1963f8e6c06cc33'
+```
+
+### Create Segment
+
+```
+curl --location --request POST 'localhost:6363/v1/segments' \
+--header 'X-Auth-Token: 2c763f5bc41fa64f95b02993bb49969a067d8a1b1f4ce2a7f1963f8e6c06cc33' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "name": "Segment Name",
+    "description": "Segment description",
+    "condition": "parcel.weight > 5000"
+}'
+```
+
+### Update Segment
+
+```
+curl --location --request PUT 'localhost:6363/v1/segments' \
+--header 'X-Auth-Token: 2c763f5bc41fa64f95b02993bb49969a067d8a1b1f4ce2a7f1963f8e6c06cc33' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "id": 1,
+    "name": "Segment Name updated",
+    "description": "Segment description edited",
+    "condition": "parcel.weight > 5001"
+}'
+```
