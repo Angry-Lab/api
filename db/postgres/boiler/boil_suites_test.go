@@ -17,6 +17,7 @@ func TestParent(t *testing.T) {
 	t.Run("Parcels", testParcels)
 	t.Run("ParcelStats", testParcelStats)
 	t.Run("SchemaMigrations", testSchemaMigrations)
+	t.Run("Segments", testSegments)
 	t.Run("Users", testUsers)
 }
 
@@ -26,6 +27,7 @@ func TestDelete(t *testing.T) {
 	t.Run("Parcels", testParcelsDelete)
 	t.Run("ParcelStats", testParcelStatsDelete)
 	t.Run("SchemaMigrations", testSchemaMigrationsDelete)
+	t.Run("Segments", testSegmentsDelete)
 	t.Run("Users", testUsersDelete)
 }
 
@@ -35,6 +37,7 @@ func TestQueryDeleteAll(t *testing.T) {
 	t.Run("Parcels", testParcelsQueryDeleteAll)
 	t.Run("ParcelStats", testParcelStatsQueryDeleteAll)
 	t.Run("SchemaMigrations", testSchemaMigrationsQueryDeleteAll)
+	t.Run("Segments", testSegmentsQueryDeleteAll)
 	t.Run("Users", testUsersQueryDeleteAll)
 }
 
@@ -44,6 +47,7 @@ func TestSliceDeleteAll(t *testing.T) {
 	t.Run("Parcels", testParcelsSliceDeleteAll)
 	t.Run("ParcelStats", testParcelStatsSliceDeleteAll)
 	t.Run("SchemaMigrations", testSchemaMigrationsSliceDeleteAll)
+	t.Run("Segments", testSegmentsSliceDeleteAll)
 	t.Run("Users", testUsersSliceDeleteAll)
 }
 
@@ -53,6 +57,7 @@ func TestExists(t *testing.T) {
 	t.Run("Parcels", testParcelsExists)
 	t.Run("ParcelStats", testParcelStatsExists)
 	t.Run("SchemaMigrations", testSchemaMigrationsExists)
+	t.Run("Segments", testSegmentsExists)
 	t.Run("Users", testUsersExists)
 }
 
@@ -62,6 +67,7 @@ func TestFind(t *testing.T) {
 	t.Run("Parcels", testParcelsFind)
 	t.Run("ParcelStats", testParcelStatsFind)
 	t.Run("SchemaMigrations", testSchemaMigrationsFind)
+	t.Run("Segments", testSegmentsFind)
 	t.Run("Users", testUsersFind)
 }
 
@@ -71,6 +77,7 @@ func TestBind(t *testing.T) {
 	t.Run("Parcels", testParcelsBind)
 	t.Run("ParcelStats", testParcelStatsBind)
 	t.Run("SchemaMigrations", testSchemaMigrationsBind)
+	t.Run("Segments", testSegmentsBind)
 	t.Run("Users", testUsersBind)
 }
 
@@ -80,6 +87,7 @@ func TestOne(t *testing.T) {
 	t.Run("Parcels", testParcelsOne)
 	t.Run("ParcelStats", testParcelStatsOne)
 	t.Run("SchemaMigrations", testSchemaMigrationsOne)
+	t.Run("Segments", testSegmentsOne)
 	t.Run("Users", testUsersOne)
 }
 
@@ -89,6 +97,7 @@ func TestAll(t *testing.T) {
 	t.Run("Parcels", testParcelsAll)
 	t.Run("ParcelStats", testParcelStatsAll)
 	t.Run("SchemaMigrations", testSchemaMigrationsAll)
+	t.Run("Segments", testSegmentsAll)
 	t.Run("Users", testUsersAll)
 }
 
@@ -98,6 +107,7 @@ func TestCount(t *testing.T) {
 	t.Run("Parcels", testParcelsCount)
 	t.Run("ParcelStats", testParcelStatsCount)
 	t.Run("SchemaMigrations", testSchemaMigrationsCount)
+	t.Run("Segments", testSegmentsCount)
 	t.Run("Users", testUsersCount)
 }
 
@@ -107,6 +117,7 @@ func TestHooks(t *testing.T) {
 	t.Run("Parcels", testParcelsHooks)
 	t.Run("ParcelStats", testParcelStatsHooks)
 	t.Run("SchemaMigrations", testSchemaMigrationsHooks)
+	t.Run("Segments", testSegmentsHooks)
 	t.Run("Users", testUsersHooks)
 }
 
@@ -121,6 +132,8 @@ func TestInsert(t *testing.T) {
 	t.Run("ParcelStats", testParcelStatsInsertWhitelist)
 	t.Run("SchemaMigrations", testSchemaMigrationsInsert)
 	t.Run("SchemaMigrations", testSchemaMigrationsInsertWhitelist)
+	t.Run("Segments", testSegmentsInsert)
+	t.Run("Segments", testSegmentsInsertWhitelist)
 	t.Run("Users", testUsersInsert)
 	t.Run("Users", testUsersInsertWhitelist)
 }
@@ -179,6 +192,7 @@ func TestReload(t *testing.T) {
 	t.Run("Parcels", testParcelsReload)
 	t.Run("ParcelStats", testParcelStatsReload)
 	t.Run("SchemaMigrations", testSchemaMigrationsReload)
+	t.Run("Segments", testSegmentsReload)
 	t.Run("Users", testUsersReload)
 }
 
@@ -188,6 +202,7 @@ func TestReloadAll(t *testing.T) {
 	t.Run("Parcels", testParcelsReloadAll)
 	t.Run("ParcelStats", testParcelStatsReloadAll)
 	t.Run("SchemaMigrations", testSchemaMigrationsReloadAll)
+	t.Run("Segments", testSegmentsReloadAll)
 	t.Run("Users", testUsersReloadAll)
 }
 
@@ -197,6 +212,7 @@ func TestSelect(t *testing.T) {
 	t.Run("Parcels", testParcelsSelect)
 	t.Run("ParcelStats", testParcelStatsSelect)
 	t.Run("SchemaMigrations", testSchemaMigrationsSelect)
+	t.Run("Segments", testSegmentsSelect)
 	t.Run("Users", testUsersSelect)
 }
 
@@ -206,6 +222,7 @@ func TestUpdate(t *testing.T) {
 	t.Run("Parcels", testParcelsUpdate)
 	t.Run("ParcelStats", testParcelStatsUpdate)
 	t.Run("SchemaMigrations", testSchemaMigrationsUpdate)
+	t.Run("Segments", testSegmentsUpdate)
 	t.Run("Users", testUsersUpdate)
 }
 
@@ -215,5 +232,6 @@ func TestSliceUpdateAll(t *testing.T) {
 	t.Run("Parcels", testParcelsSliceUpdateAll)
 	t.Run("ParcelStats", testParcelStatsSliceUpdateAll)
 	t.Run("SchemaMigrations", testSchemaMigrationsSliceUpdateAll)
+	t.Run("Segments", testSegmentsSliceUpdateAll)
 	t.Run("Users", testUsersSliceUpdateAll)
 }
