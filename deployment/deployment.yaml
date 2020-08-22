@@ -38,6 +38,9 @@ spec:
             requests:
               memory: 500Mi
               cpu: 500m
+          envFrom:
+            - configMapRef:
+                name: admin-api-config
       imagePullSecrets:
         - name: r-golang-pro-registry
 ---
@@ -51,7 +54,7 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/rewrite-target: /v1/$1
 spec:
   rules:
     - host: api.golangpro.ru
