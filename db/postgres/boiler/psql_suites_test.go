@@ -16,5 +16,7 @@ func TestUpsert(t *testing.T) {
 
 	t.Run("SchemaMigrations", testSchemaMigrationsUpsert)
 
+	t.Run("Segments", testSegmentsUpsert)
+
 	t.Run("Users", testUsersUpsert)
 }

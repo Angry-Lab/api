@@ -3,6 +3,7 @@ package server
 import (
 	"github.com/Angry-Lab/api/pkg/city"
 	"github.com/Angry-Lab/api/pkg/parcel"
+	"github.com/Angry-Lab/api/pkg/segment"
 	"github.com/Angry-Lab/api/pkg/user"
 	"github.com/labstack/echo/v4"
 	"net/http"
@@ -13,9 +14,11 @@ const (
 )
 
 type Handler struct {
-	Users   user.UseCase
+	Users    user.UseCase
+	Cities   city.Repository
+	Segments segment.Repository
+
 	Parcels *parcel.Repository
-	Cities  city.Repository
 }
 
 func (h *Handler) WithAuth(handlerFunc echo.HandlerFunc) echo.HandlerFunc {

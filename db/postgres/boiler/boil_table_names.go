@@ -9,6 +9,7 @@ var TableNames = struct {
 	Parcel           string
 	ParcelStat       string
 	SchemaMigrations string
+	Segment          string
 	User             string
 }{
 	AuthToken:        "auth_token",
@@ -16,5 +17,6 @@ var TableNames = struct {
 	Parcel:           "parcel",
 	ParcelStat:       "parcel_stat",
 	SchemaMigrations: "schema_migrations",
+	Segment:          "segment",
 	User:             "user",
 }
