@@ -3,9 +3,11 @@ package server
 import (
 	"database/sql"
 	"fmt"
+	"github.com/Angry-Lab/api/pkg/parcel"
 	"net/http"
 
 	"github.com/Angry-Lab/api/internal/env"
+	cities "github.com/Angry-Lab/api/pkg/city/postgres"
 	"github.com/Angry-Lab/api/pkg/user"
 	"github.com/Angry-Lab/api/pkg/user/postgres"
 	"github.com/labstack/echo/v4"
@@ -36,7 +38,9 @@ func Run(config *env.Config) error {
 	tokenRepo := postgres.Tokens(db)
 
 	h := &Handler{
-		Users: user.NewUseCase(userRepo, tokenRepo),
+		Users:   user.NewUseCase(userRepo, tokenRepo),
+		Parcels: parcel.NewRepo(db),
+		Cities:  cities.Cities(db),
 	}
 
 	e.POST("/v1/auth", h.Auth)
@@ -46,6 +50,8 @@ func Run(config *env.Config) error {
 	e.POST("/v1/users", h.CreateUser, h.WithAuth, h.WithAccess(user.RoleOwner))
 	e.PUT("/v1/users", h.UpdateUser, h.WithAuth, h.WithAccess(user.RoleOwner))
 	e.DELETE("/v1/users", h.DeleteUser, h.WithAuth, h.WithAccess(user.RoleOwner))
+
+	e.POST("/v1/parcels", h.UploadParcelsCSV)
 
 	return e.Start(fmt.Sprintf("%s:%d", config.Host, config.Port))
 }

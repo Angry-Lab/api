@@ -8,6 +8,10 @@ import "testing"
 func TestUpsert(t *testing.T) {
 	t.Run("AuthTokens", testAuthTokensUpsert)
 
+	t.Run("CityIndices", testCityIndicesUpsert)
+
+	t.Run("Parcels", testParcelsUpsert)
+
 	t.Run("SchemaMigrations", testSchemaMigrationsUpsert)
 
 	t.Run("Users", testUsersUpsert)
