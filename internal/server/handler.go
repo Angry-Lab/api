@@ -1,6 +1,7 @@
 package server
 
 import (
+	"github.com/Angry-Lab/api/pkg/segment"
 	"github.com/Angry-Lab/api/pkg/user"
 	"github.com/labstack/echo/v4"
 	"net/http"
@@ -11,7 +12,8 @@ const (
 )
 
 type Handler struct {
-	Users user.UseCase
+	Users    user.UseCase
+	Segments segment.UseCase
 }
 
 func (h *Handler) WithAuth(handlerFunc echo.HandlerFunc) echo.HandlerFunc {

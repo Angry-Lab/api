@@ -3,24 +3,23 @@ package mockup
 import (
 	"context"
 	"errors"
-	"github.com/Angry-Lab/api/pkg/entity"
 	"github.com/Angry-Lab/api/pkg/segment"
 	"sync"
 )
 
 type segmentMockup struct {
-	store map[int]*entity.Segment
+	store map[int]*segment.Segment
 	mu    *sync.RWMutex
 }
 
 func Segments() segment.Repository {
 	return &segmentMockup{
-		store: make(map[int]*entity.Segment),
+		store: make(map[int]*segment.Segment),
 		mu:    &sync.RWMutex{},
 	}
 }
 
-func (mockup segmentMockup) GetByID(ctx context.Context, id int) (*entity.Segment, error) {
+func (mockup segmentMockup) GetByID(ctx context.Context, id int) (*segment.Segment, error) {
 	mockup.mu.Lock()
 	defer mockup.mu.Unlock()
 	s, ok := mockup.store[id]
@@ -31,7 +30,7 @@ func (mockup segmentMockup) GetByID(ctx context.Context, id int) (*entity.Segmen
 	}
 }
 
-func (mockup segmentMockup) PutIfExits(ctx context.Context, segment *entity.Segment) error {
+func (mockup segmentMockup) PutIfExits(ctx context.Context, segment *segment.Segment) error {
 	mockup.mu.Lock()
 	defer mockup.mu.Unlock()
 	var id = segment.ID
@@ -44,7 +43,7 @@ func (mockup segmentMockup) PutIfExits(ctx context.Context, segment *entity.Segm
 	}
 }
 
-func (mockup segmentMockup) Create(ctx context.Context, segment *entity.Segment) error {
+func (mockup segmentMockup) Create(ctx context.Context, segment *segment.Segment) error {
 	mockup.mu.Lock()
 	defer mockup.mu.Unlock()
 	var id = segment.ID
@@ -67,4 +66,12 @@ func (mockup segmentMockup) Delete(ctx context.Context, id int) error {
 	} else {
 		return errors.New("segment not found")
 	}
+}
+
+func (mockup segmentMockup) GetAll(ctx context.Context) ([]*segment.Segment, error) {
+	a := []*segment.Segment{}
+	for _, v := range mockup.store {
+		a = append(a, v)
+	}
+	return a, nil
 }

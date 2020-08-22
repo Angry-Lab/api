@@ -47,5 +47,11 @@ func Run(config *env.Config) error {
 	e.PUT("/v1/users", h.UpdateUser, h.WithAuth, h.WithAccess(user.RoleOwner))
 	e.DELETE("/v1/users", h.DeleteUser, h.WithAuth, h.WithAccess(user.RoleOwner))
 
+	e.GET("/v1/segment", h.GetSegment, h.WithAuth, h.WithAccess(user.RoleOwner))
+	e.GET("/v1/segment/all", h.GetSegmentList, h.WithAuth, h.WithAccess(user.RoleOwner))
+	e.PUT("/v1/segment", h.PutSegment, h.WithAuth, h.WithAccess(user.RoleOwner))
+	e.POST("/v1/segment", h.CreateSegment, h.WithAuth, h.WithAccess(user.RoleOwner))
+	e.DELETE("/v1/segment", h.DeleteSegment, h.WithAuth, h.WithAccess(user.RoleOwner))
+
 	return e.Start(fmt.Sprintf("%s:%d", config.Host, config.Port))
 }
