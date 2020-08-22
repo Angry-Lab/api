@@ -56,3 +56,15 @@ func (mockup segmentMockup) Create(ctx context.Context, segment *entity.Segment)
 		return errors.New("unable to add new segment. segment found")
 	}
 }
+
+func (mockup segmentMockup) Delete(ctx context.Context, id int) error {
+	mockup.mu.Lock()
+	defer mockup.mu.Unlock()
+	_, ok := mockup.store[id]
+	if !ok {
+		mockup.store[id] = nil
+		return nil
+	} else {
+		return errors.New("segment not found")
+	}
+}
