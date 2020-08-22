@@ -9,4 +9,5 @@ type Repository interface {
 	GetByID(ctx context.Context, id int) (*Segment, error)
 	PutIfExits(ctx context.Context, segment *Segment) error
 	Create(ctx context.Context, segment *Segment) error
+	Metadata(ctx context.Context, segment *Segment) error
 }

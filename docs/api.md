@@ -73,3 +73,10 @@ curl --location --request PUT 'localhost:6363/v1/segments' \
     "condition": "parcel.weight > 5001"
 }'
 ```
+
+### Segments Statistics
+
+```
+curl --location --request GET 'localhost:6363/v1/segments/1/stats' \
+--header 'X-Auth-Token: 2c763f5bc41fa64f95b02993bb49969a067d8a1b1f4ce2a7f1963f8e6c06cc33'
+```

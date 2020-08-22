@@ -3,11 +3,14 @@ package postgres
 import (
 	"context"
 	"database/sql"
+	"fmt"
+
 	"github.com/Angry-Lab/api/db/postgres/boiler"
 	"github.com/Angry-Lab/api/pkg/segment"
 	"github.com/partyzanex/layer"
 	"github.com/pkg/errors"
 	"github.com/volatiletech/sqlboiler/v4/boil"
+	"github.com/volatiletech/sqlboiler/v4/queries"
 	"github.com/volatiletech/sqlboiler/v4/queries/qm"
 )
 
@@ -75,6 +78,43 @@ func (repo *segments) Create(ctx context.Context, seg *segment.Segment) error {
 	}
 
 	modelToSegment(model, seg)
+
+	return nil
+}
+
+type metadata struct {
+	TotalCost float64 `boil:"total_cost"`
+	TotalNP   float64 `boil:"total_np"`
+	Distance  float64 `boil:"distance"`
+	Count     int     `boil:"cnt"`
+	Users     int     `boil:"users"`
+}
+
+func (repo *segments) Metadata(ctx context.Context, seg *segment.Segment) error {
+	q := `
+SELECT
+       sum(parcel.cost) as total_cost,
+       sum(parcel.amount_np) as total_np,
+       round(avg(parcel.distance)/1000, 2) as distance,
+       (SELECT count(*) FROM parcel WHERE %s) as cnt,
+       (SELECT count(*) FROM (SELECT count(*) cnt FROM parcel WHERE %s GROUP BY hid) as st) as users
+FROM parcel
+WHERE %s;
+`
+	q = fmt.Sprintf(q, seg.Condition, seg.Condition, seg.Condition)
+	tg := &metadata{}
+	c, ex := layer.GetExecutor(ctx, repo.ex)
+
+	err := queries.Raw(q).Bind(c, ex, tg)
+	if err != nil {
+		return nil
+	}
+
+	seg.Metadata.TotalNP = tg.TotalNP
+	seg.Metadata.TotalCost = tg.TotalCost
+	seg.Metadata.Distance = tg.Distance
+	seg.Metadata.Count = tg.Count
+	seg.Metadata.Users = tg.Users
 
 	return nil
 }
