@@ -31,7 +31,8 @@ func (h *Handler) Auth(ctx echo.Context) error {
 		return echo.NewHTTPError(http.StatusInternalServerError, err.Error()).SetInternal(err)
 	}
 
-	t.User = nil
+	u.Password = ""
+	t.User = u
 
 	return ctx.JSON(http.StatusOK, t)
 }

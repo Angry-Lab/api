@@ -5,10 +5,16 @@ package boiler
 
 var TableNames = struct {
 	AuthToken        string
+	CityIndex        string
+	Parcel           string
+	ParcelStat       string
 	SchemaMigrations string
 	User             string
 }{
 	AuthToken:        "auth_token",
+	CityIndex:        "city_index",
+	Parcel:           "parcel",
+	ParcelStat:       "parcel_stat",
 	SchemaMigrations: "schema_migrations",
 	User:             "user",
 }

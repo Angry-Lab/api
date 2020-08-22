@@ -13,66 +13,99 @@ import "testing"
 // Separating the tests thusly grants avoidance of Postgres deadlocks.
 func TestParent(t *testing.T) {
 	t.Run("AuthTokens", testAuthTokens)
+	t.Run("CityIndices", testCityIndices)
+	t.Run("Parcels", testParcels)
+	t.Run("ParcelStats", testParcelStats)
 	t.Run("SchemaMigrations", testSchemaMigrations)
 	t.Run("Users", testUsers)
 }
 
 func TestDelete(t *testing.T) {
 	t.Run("AuthTokens", testAuthTokensDelete)
+	t.Run("CityIndices", testCityIndicesDelete)
+	t.Run("Parcels", testParcelsDelete)
+	t.Run("ParcelStats", testParcelStatsDelete)
 	t.Run("SchemaMigrations", testSchemaMigrationsDelete)
 	t.Run("Users", testUsersDelete)
 }
 
 func TestQueryDeleteAll(t *testing.T) {
 	t.Run("AuthTokens", testAuthTokensQueryDeleteAll)
+	t.Run("CityIndices", testCityIndicesQueryDeleteAll)
+	t.Run("Parcels", testParcelsQueryDeleteAll)
+	t.Run("ParcelStats", testParcelStatsQueryDeleteAll)
 	t.Run("SchemaMigrations", testSchemaMigrationsQueryDeleteAll)
 	t.Run("Users", testUsersQueryDeleteAll)
 }
 
 func TestSliceDeleteAll(t *testing.T) {
 	t.Run("AuthTokens", testAuthTokensSliceDeleteAll)
+	t.Run("CityIndices", testCityIndicesSliceDeleteAll)
+	t.Run("Parcels", testParcelsSliceDeleteAll)
+	t.Run("ParcelStats", testParcelStatsSliceDeleteAll)
 	t.Run("SchemaMigrations", testSchemaMigrationsSliceDeleteAll)
 	t.Run("Users", testUsersSliceDeleteAll)
 }
 
 func TestExists(t *testing.T) {
 	t.Run("AuthTokens", testAuthTokensExists)
+	t.Run("CityIndices", testCityIndicesExists)
+	t.Run("Parcels", testParcelsExists)
+	t.Run("ParcelStats", testParcelStatsExists)
 	t.Run("SchemaMigrations", testSchemaMigrationsExists)
 	t.Run("Users", testUsersExists)
 }
 
 func TestFind(t *testing.T) {
 	t.Run("AuthTokens", testAuthTokensFind)
+	t.Run("CityIndices", testCityIndicesFind)
+	t.Run("Parcels", testParcelsFind)
+	t.Run("ParcelStats", testParcelStatsFind)
 	t.Run("SchemaMigrations", testSchemaMigrationsFind)
 	t.Run("Users", testUsersFind)
 }
 
 func TestBind(t *testing.T) {
 	t.Run("AuthTokens", testAuthTokensBind)
+	t.Run("CityIndices", testCityIndicesBind)
+	t.Run("Parcels", testParcelsBind)
+	t.Run("ParcelStats", testParcelStatsBind)
 	t.Run("SchemaMigrations", testSchemaMigrationsBind)
 	t.Run("Users", testUsersBind)
 }
 
 func TestOne(t *testing.T) {
 	t.Run("AuthTokens", testAuthTokensOne)
+	t.Run("CityIndices", testCityIndicesOne)
+	t.Run("Parcels", testParcelsOne)
+	t.Run("ParcelStats", testParcelStatsOne)
 	t.Run("SchemaMigrations", testSchemaMigrationsOne)
 	t.Run("Users", testUsersOne)
 }
 
 func TestAll(t *testing.T) {
 	t.Run("AuthTokens", testAuthTokensAll)
+	t.Run("CityIndices", testCityIndicesAll)
+	t.Run("Parcels", testParcelsAll)
+	t.Run("ParcelStats", testParcelStatsAll)
 	t.Run("SchemaMigrations", testSchemaMigrationsAll)
 	t.Run("Users", testUsersAll)
 }
 
 func TestCount(t *testing.T) {
 	t.Run("AuthTokens", testAuthTokensCount)
+	t.Run("CityIndices", testCityIndicesCount)
+	t.Run("Parcels", testParcelsCount)
+	t.Run("ParcelStats", testParcelStatsCount)
 	t.Run("SchemaMigrations", testSchemaMigrationsCount)
 	t.Run("Users", testUsersCount)
 }
 
 func TestHooks(t *testing.T) {
 	t.Run("AuthTokens", testAuthTokensHooks)
+	t.Run("CityIndices", testCityIndicesHooks)
+	t.Run("Parcels", testParcelsHooks)
+	t.Run("ParcelStats", testParcelStatsHooks)
 	t.Run("SchemaMigrations", testSchemaMigrationsHooks)
 	t.Run("Users", testUsersHooks)
 }
@@ -80,6 +113,12 @@ func TestHooks(t *testing.T) {
 func TestInsert(t *testing.T) {
 	t.Run("AuthTokens", testAuthTokensInsert)
 	t.Run("AuthTokens", testAuthTokensInsertWhitelist)
+	t.Run("CityIndices", testCityIndicesInsert)
+	t.Run("CityIndices", testCityIndicesInsertWhitelist)
+	t.Run("Parcels", testParcelsInsert)
+	t.Run("Parcels", testParcelsInsertWhitelist)
+	t.Run("ParcelStats", testParcelStatsInsert)
+	t.Run("ParcelStats", testParcelStatsInsertWhitelist)
 	t.Run("SchemaMigrations", testSchemaMigrationsInsert)
 	t.Run("SchemaMigrations", testSchemaMigrationsInsertWhitelist)
 	t.Run("Users", testUsersInsert)
@@ -136,30 +175,45 @@ func TestToManyRemove(t *testing.T) {}
 
 func TestReload(t *testing.T) {
 	t.Run("AuthTokens", testAuthTokensReload)
+	t.Run("CityIndices", testCityIndicesReload)
+	t.Run("Parcels", testParcelsReload)
+	t.Run("ParcelStats", testParcelStatsReload)
 	t.Run("SchemaMigrations", testSchemaMigrationsReload)
 	t.Run("Users", testUsersReload)
 }
 
 func TestReloadAll(t *testing.T) {
 	t.Run("AuthTokens", testAuthTokensReloadAll)
+	t.Run("CityIndices", testCityIndicesReloadAll)
+	t.Run("Parcels", testParcelsReloadAll)
+	t.Run("ParcelStats", testParcelStatsReloadAll)
 	t.Run("SchemaMigrations", testSchemaMigrationsReloadAll)
 	t.Run("Users", testUsersReloadAll)
 }
 
 func TestSelect(t *testing.T) {
 	t.Run("AuthTokens", testAuthTokensSelect)
+	t.Run("CityIndices", testCityIndicesSelect)
+	t.Run("Parcels", testParcelsSelect)
+	t.Run("ParcelStats", testParcelStatsSelect)
 	t.Run("SchemaMigrations", testSchemaMigrationsSelect)
 	t.Run("Users", testUsersSelect)
 }
 
 func TestUpdate(t *testing.T) {
 	t.Run("AuthTokens", testAuthTokensUpdate)
+	t.Run("CityIndices", testCityIndicesUpdate)
+	t.Run("Parcels", testParcelsUpdate)
+	t.Run("ParcelStats", testParcelStatsUpdate)
 	t.Run("SchemaMigrations", testSchemaMigrationsUpdate)
 	t.Run("Users", testUsersUpdate)
 }
 
 func TestSliceUpdateAll(t *testing.T) {
 	t.Run("AuthTokens", testAuthTokensSliceUpdateAll)
+	t.Run("CityIndices", testCityIndicesSliceUpdateAll)
+	t.Run("Parcels", testParcelsSliceUpdateAll)
+	t.Run("ParcelStats", testParcelStatsSliceUpdateAll)
 	t.Run("SchemaMigrations", testSchemaMigrationsSliceUpdateAll)
 	t.Run("Users", testUsersSliceUpdateAll)
 }
