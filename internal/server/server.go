@@ -56,6 +56,7 @@ func Run(config *env.Config) error {
 
 	e.GET("/v1/segments", h.ListSegments, h.WithAuth)
 	e.GET("/v1/segments/:id", h.GetSegment, h.WithAuth)
+	e.GET("/v1/segments/:id/stats", h.SegmentStats, h.WithAuth)
 	e.POST("/v1/segments", h.CreateSegment, h.WithAuth)
 	e.PUT("/v1/segments", h.UpdateSegment, h.WithAuth)
 
